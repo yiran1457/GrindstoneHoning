@@ -1,0 +1,16 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "net.yiran.grindstone_honing.core.mixins",
+  "compatibilityLevel": "JAVA_17",
+  "refmap": "grindstone_honing.refmap.json",
+  "mixins": [
+    "GrindstoneMenuMixin$NewSlot",
+    "GrindstoneMenuMixin"
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
