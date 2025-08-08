@@ -27,6 +27,8 @@ public class GrindstoneMenuMixin {
             if (player instanceof ServerPlayer serverPlayer && stack.getItem() instanceof IModularItem modularItem) {
                 var inputSlot = ((GrindstoneMenu) serverPlayer.containerMenu).repairSlots;
                 var item = inputSlot.getItem(1);
+                if (!inputSlot.getItem(0).isEmpty()) return;
+                if (!item.getItem().equals(modularItem)) return;
                 GrindstoneHandler.showInfo(serverPlayer, item, stack, modularItem);
             }
         }
