@@ -21,7 +21,7 @@ public class GrindstoneHandler {
         if (IModularItem.isHoneable(stack)) return;
         var result = getResultItem(stack, iModularItem);
         event.setOutput(result);
-
+        event.setXp(0);
     }
 
     public static void showInfo(ServerPlayer serverPlayer, ItemStack origin, ItemStack target, IModularItem item) {
