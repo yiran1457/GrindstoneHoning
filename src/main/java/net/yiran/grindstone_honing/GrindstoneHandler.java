@@ -41,11 +41,13 @@ public class GrindstoneHandler {
         int damage = Integer.MAX_VALUE;
         int i = stack.getEnchantmentLevel(Enchantments.UNBREAKING) + 1;
         if (stack.isDamageableItem()) {
-            damage = (stack.getMaxDamage() - 1 - stack.getDamageValue() )* i;
+            damage = (stack.getMaxDamage() - 1 - stack.getDamageValue()) * i;
         }
         var progress = Math.min(getHoningProgress(stack, item), damage);
         var result = stack.copy();
-        result.setDamageValue(result.getDamageValue() + progress / i);
+        if (stack.isDamageableItem()) {
+            result.setDamageValue(result.getDamageValue() + progress / i);
+        }
         item.tickProgression(null, result, progress);
         return result;
     }
