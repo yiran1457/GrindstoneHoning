@@ -1,0 +1,6 @@
+{
+  "item.grindstone_honing.minigrindstone": "迷你砂轮",
+  "tooltip.miniGrindstone.info": "右键其他模块化物品，为其打磨",
+  "item.grindstone_honing.mininetheritegrindstone": "迷你下界合金砂轮",
+  "tooltip.miniNetheriteGrindstone.info": "右键其他模块化物品，为其打磨(不消耗耐久)"
+}

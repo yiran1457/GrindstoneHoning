@@ -1,0 +1,6 @@
+{
+  "item.grindstone_honing.minigrindstone": "MiniGrindstone",
+  "tooltip.miniGrindstone.info": "right click other modularItem to honing",
+  "item.grindstone_honing.mininetheritegrindstone": "MiniNetheriteGrindstone",
+  "tooltip.miniNetheriteGrindstone.info": "right click other modularItem to honing(not damage)"
+}

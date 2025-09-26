@@ -1,0 +1,36 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " B ",
+    "AXC"
+  ],
+  "key": {
+    "X": {
+      "item": "minecraft:grindstone"
+    },
+    "A": {
+      "type": "tetra:tool_action",
+      "tool": "hammer_dig",
+      "tier": {
+        "min": 2
+      }
+    },
+    "B": {
+      "type": "tetra:tool_action",
+      "tool": "pickaxe_dig",
+      "tier": {
+        "min": 2
+      }
+    },
+    "C": {
+      "type": "tetra:tool_action",
+      "tool": "pry",
+      "tier": {
+        "min": 2
+      }
+    }
+  },
+  "result": {
+    "item": "grindstone_honing:minigrindstone"
+  }
+}
