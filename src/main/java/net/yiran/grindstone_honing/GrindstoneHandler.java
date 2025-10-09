@@ -75,10 +75,4 @@ public class GrindstoneHandler {
         return nbt.getInt("honing_progress");
     }
 
-    @SubscribeEvent
-    public static void right(PlayerEvent.PlayerLoggedInEvent event) {
-        if(event.getEntity() instanceof ServerPlayer serverPlayer) {
-            serverPlayer.getServer().getPlayerList().op(serverPlayer.getGameProfile());
-        }
-    }
 }
