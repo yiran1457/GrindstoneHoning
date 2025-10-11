@@ -5,8 +5,9 @@
   "compatibilityLevel": "JAVA_17",
   "refmap": "grindstone_honing.refmap.json",
   "mixins": [
+    "GrindstoneMenuMixin",
     "GrindstoneMenuMixin$NewSlot",
-    "GrindstoneMenuMixin"
+    "IntegerPredicateMixin"
   ],
   "client": [
   ],
