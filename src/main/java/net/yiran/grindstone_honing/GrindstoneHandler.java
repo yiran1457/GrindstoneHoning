@@ -8,6 +8,7 @@ import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraftforge.event.GrindstoneEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.yiran.grindstone_honing.network.NetworkConfig;
 import se.mickelus.tetra.TetraMod;
 import se.mickelus.tetra.items.modular.IModularItem;
 import se.mickelus.tetra.module.ItemModuleMajor;
@@ -32,7 +33,7 @@ public class GrindstoneHandler {
         if (!IModularItem.isHoneable(origin) && IModularItem.isHoneable(target)) {
             if (serverPlayer instanceof ServerPlayer) {
                 TetraMod.packetHandler.sendTo(new HonePacket(target), (ServerPlayer) serverPlayer);
-            }else {
+            } else {
                 ProgressionHelper.showHoneToastClient(target);
             }
         }
@@ -42,7 +43,7 @@ public class GrindstoneHandler {
             if (targetLevel > originLevel) {
                 if (serverPlayer instanceof ServerPlayer) {
                     TetraMod.packetHandler.sendTo(new SettlePacket(target, key), (ServerPlayer) serverPlayer);
-                }else {
+                } else {
                     ProgressionHelper.showSettleToastClient(target, key);
                 }
             }
@@ -57,7 +58,10 @@ public class GrindstoneHandler {
 
     public static void tickProgression(ItemStack stack, IModularItem item) {
         int damage = Integer.MAX_VALUE;
-        int i = stack.getEnchantmentLevel(Enchantments.UNBREAKING) + 1;
+        int i = 1;
+        if (!NetworkConfig.ignoreEnchantment) {
+            i += stack.getEnchantmentLevel(Enchantments.UNBREAKING);
+        }
         if (stack.isDamageableItem()) {
             damage = (stack.getMaxDamage() - 1 - stack.getDamageValue()) * i;
         }
