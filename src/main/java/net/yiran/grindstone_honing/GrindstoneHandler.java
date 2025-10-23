@@ -59,15 +59,17 @@ public class GrindstoneHandler {
     public static void tickProgression(ItemStack stack, IModularItem item) {
         int damage = Integer.MAX_VALUE;
         int i = 1;
-        if (!NetworkConfig.ignoreEnchantment) {
-            i += stack.getEnchantmentLevel(Enchantments.UNBREAKING);
-        }
-        if (stack.isDamageableItem()) {
-            damage = (stack.getMaxDamage() - 1 - stack.getDamageValue()) * i;
+        if (NetworkConfig.useDurability) {
+            if (!NetworkConfig.ignoreEnchantment) {
+                i += stack.getEnchantmentLevel(Enchantments.UNBREAKING);
+            }
+            if (stack.isDamageableItem()) {
+                damage = (stack.getMaxDamage() - 1 - stack.getDamageValue()) * i;
+            }
         }
         var progress = Math.min(getHoningProgress(stack, item), damage);
         var result = stack.copy();
-        if (stack.isDamageableItem()) {
+        if (stack.isDamageableItem() && NetworkConfig.useDurability) {
             stack.setDamageValue(result.getDamageValue() + progress / i);
         }
         item.tickProgression(null, stack, progress);
