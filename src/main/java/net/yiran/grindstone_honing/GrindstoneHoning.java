@@ -1,8 +1,11 @@
 package net.yiran.grindstone_honing;
 
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
@@ -35,6 +38,7 @@ public class GrindstoneHoning {
     public GrindstoneHoning() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         ITEMS.register(modEventBus);
+        modEventBus.addListener(this::onBuildCreativeModeTab);
 
         ModLoadingContext.get().registerConfig(
                 ModConfig.Type.COMMON,
@@ -50,5 +54,12 @@ public class GrindstoneHoning {
 
         MinecraftForge.EVENT_BUS.register(NetworkConfig.class);
         MinecraftForge.EVENT_BUS.register(GrindstoneHandler.class);
+    }
+
+    public void onBuildCreativeModeTab(BuildCreativeModeTabContentsEvent event){
+        if (event.getTabKey() == ResourceKey.create(Registries.CREATIVE_MODE_TAB, new ResourceLocation("tetra", "default"))) {
+            event.accept(MINI.get().getDefaultInstance());
+            event.accept(MINI_NETHERITE.get().getDefaultInstance());
+        }
     }
 }
