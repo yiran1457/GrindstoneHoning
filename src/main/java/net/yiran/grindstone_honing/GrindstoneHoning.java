@@ -10,6 +10,7 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.network.NetworkRegistry;
 import net.minecraftforge.network.simple.SimpleChannel;
@@ -39,6 +40,7 @@ public class GrindstoneHoning {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         ITEMS.register(modEventBus);
         modEventBus.addListener(this::onBuildCreativeModeTab);
+        modEventBus.addListener(this::onCommonSetup);
 
         ModLoadingContext.get().registerConfig(
                 ModConfig.Type.COMMON,
@@ -54,6 +56,10 @@ public class GrindstoneHoning {
 
         MinecraftForge.EVENT_BUS.register(NetworkConfig.class);
         MinecraftForge.EVENT_BUS.register(GrindstoneHandler.class);
+    }
+
+    public void onCommonSetup(FMLCommonSetupEvent event) {
+        NetworkConfig.initConfig();
     }
 
     public void onBuildCreativeModeTab(BuildCreativeModeTabContentsEvent event){
