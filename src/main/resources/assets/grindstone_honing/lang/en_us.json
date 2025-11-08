@@ -2,5 +2,8 @@
   "item.grindstone_honing.minigrindstone": "MiniGrindstone",
   "tooltip.miniGrindstone.info": "right click other modularItem to honing",
   "item.grindstone_honing.mininetheritegrindstone": "MiniNetheriteGrindstone",
-  "tooltip.miniNetheriteGrindstone.info": "right click other modularItem to honing(not damage)"
+  "tooltip.miniNetheriteGrindstone.info": "right click other modularItem to honing(not damage)",
+  "tooltip.tetra.toolaction.min": "Requires: %1$s level > %2$s",
+  "tooltip.tetra.toolaction.max": "Requires: %1$s level < %2$s",
+  "tooltip.tetra.toolaction.both": "Requires: %2$s < %1$s level < %3$s"
 }

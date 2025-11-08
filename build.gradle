@@ -134,6 +134,8 @@ dependencies {
 
     modImplementation("curse.maven:mutil-351914:6418901")
     modImplementation("curse.maven:tetra-289712:6418957")
+
+    modRuntimeOnly("curse.maven:jei-238222:6600311")
 }
 
 // Uncomment the lines below if you wish to configure mixin. The mixin file should be named modid.mixins.json.
