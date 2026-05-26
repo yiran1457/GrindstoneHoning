@@ -5,11 +5,13 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantments;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.GrindstoneEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.yiran.grindstone_honing.network.NetworkConfig;
 import se.mickelus.tetra.TetraMod;
+import se.mickelus.tetra.event.ModularItemDamageEvent;
 import se.mickelus.tetra.items.modular.IModularItem;
 import se.mickelus.tetra.module.ItemModuleMajor;
 import se.mickelus.tetra.module.improvement.HonePacket;
@@ -38,13 +40,15 @@ public class GrindstoneHandler {
             }
         }
         for (String key : item.getMajorModuleKeys(target)) {
-            var originLevel = ((ItemModuleMajor) item.getModuleFromSlot(origin, key)).getImprovementLevel(origin, "settled");
-            var targetLevel = ((ItemModuleMajor) item.getModuleFromSlot(target, key)).getImprovementLevel(target, "settled");
-            if (targetLevel > originLevel) {
-                if (serverPlayer instanceof ServerPlayer) {
-                    TetraMod.packetHandler.sendTo(new SettlePacket(target, key), (ServerPlayer) serverPlayer);
-                } else {
-                    ProgressionHelper.showSettleToastClient(target, key);
+            if ((item.getModuleFromSlot(origin, key) instanceof ItemModuleMajor originModule) && (item.getModuleFromSlot(target, key) instanceof ItemModuleMajor targetModule)) {
+                var originLevel = originModule.getImprovementLevel(origin, "settled");
+                var targetLevel = targetModule.getImprovementLevel(target, "settled");
+                if (targetLevel > originLevel) {
+                    if (serverPlayer instanceof ServerPlayer) {
+                        TetraMod.packetHandler.sendTo(new SettlePacket(target, key), (ServerPlayer) serverPlayer);
+                    } else {
+                        ProgressionHelper.showSettleToastClient(target, key);
+                    }
                 }
             }
         }
@@ -65,6 +69,9 @@ public class GrindstoneHandler {
             }
             if (stack.isDamageableItem()) {
                 damage = (stack.getMaxDamage() - 1 - stack.getDamageValue()) * i;
+                var event = new ModularItemDamageEvent(null, stack, damage);
+                MinecraftForge.EVENT_BUS.post(event);
+                damage = event.getAmount();
             }
         }
         var progress = Math.min(getHoningProgress(stack, item), damage);

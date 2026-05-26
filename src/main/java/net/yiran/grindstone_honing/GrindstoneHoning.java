@@ -27,8 +27,8 @@ import net.yiran.grindstone_honing.network.NetworkConfig;
 public class GrindstoneHoning {
     public static final String MODID = "grindstone_honing";
     public DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MODID);
-    public RegistryObject<MiniGrindstoneItem> MINI = ITEMS.register("minigrindstone",MiniGrindstoneItem::new);
-    public RegistryObject<MiniNetheriteGrindstoneItem> MINI_NETHERITE = ITEMS.register("mininetheritegrindstone",MiniNetheriteGrindstoneItem::new);
+    public RegistryObject<MiniGrindstoneItem> MINI = ITEMS.register("minigrindstone", MiniGrindstoneItem::new);
+    public RegistryObject<MiniNetheriteGrindstoneItem> MINI_NETHERITE = ITEMS.register("mininetheritegrindstone", MiniNetheriteGrindstoneItem::new);
 
     public static String version = "1.0.0";
     public static SimpleChannel NETWORK = NetworkRegistry.newSimpleChannel(
@@ -43,7 +43,7 @@ public class GrindstoneHoning {
         ITEMS.register(modEventBus);
         modEventBus.addListener(this::onBuildCreativeModeTab);
         modEventBus.addListener(this::onCommonSetup);
-        if(FMLEnvironment.dist == Dist.CLIENT){
+        if (FMLEnvironment.dist == Dist.CLIENT) {
             modEventBus.register(ClientHandler.class);
         }
 
@@ -67,7 +67,7 @@ public class GrindstoneHoning {
         NetworkConfig.initConfig();
     }
 
-    public void onBuildCreativeModeTab(BuildCreativeModeTabContentsEvent event){
+    public void onBuildCreativeModeTab(BuildCreativeModeTabContentsEvent event) {
         if (event.getTabKey() == ResourceKey.create(Registries.CREATIVE_MODE_TAB, new ResourceLocation("tetra", "default"))) {
             event.accept(MINI.get().getDefaultInstance());
             event.accept(MINI_NETHERITE.get().getDefaultInstance());
